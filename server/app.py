@@ -66,11 +66,10 @@ def process():
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
     })
 
-    print(
-        f"[{latest_data['timestamp']}] "
-        f"T={temp}°C  H={hum}%  M={moist}  L={lux}lux | "
-        f"pump={pump}  light={light}  fan={fan}"
-    )
+    print("\n" + "="*50)
+    print(f"📡 [{latest_data['timestamp']}] Incoming Data: {data}")
+    print(f"🧠 Rule Engine Decision: pump={pump}, light={light}, fan={fan}")
+    print("="*50 + "\n")
 
     return jsonify({"pump": pump, "light": light, "fan": fan})
 
@@ -83,5 +82,5 @@ def status():
 
 # ── Entry point ──────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    print("🌱 Autonomous Hive server starting on http://0.0.0.0:5000")
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    print("🌱 Autonomous Hive server starting on http://0.0.0.0:5001")
+    app.run(host="0.0.0.0", port=5001, debug=True)

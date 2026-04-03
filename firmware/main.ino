@@ -22,7 +22,11 @@ const char* SSID      = "TP-Link_251C_5G";
 const char* PASSWORD  = "84674012";
 
 // ── Server endpoint ─────────────────────────────────────────────────────────
-const char* SERVER_URL = "http://192.168.0.103:5000/process";
+const char* SERVER_URL = "http://192.168.0.103:5001/process";
+
+// ── Test Mode ───────────────────────────────────────────────────────────────
+// Set to true to mock sensor values for guaranteed relay activation
+#define TEST_MODE true
 
 // ── Pin definitions ─────────────────────────────────────────────────────────
 #define DHT_PIN        13       // DHT22 data
@@ -130,6 +134,14 @@ void sendSensorData() {
   float lux = lightMeter.readLightLevel();
   if (lux < 0) lux = 0;   // sensor error guard
 
+  // ── TEST MODE OVERRIDE ───────────────────────────────────────────────────
+  if (TEST_MODE) {
+    temp = 35.0;   // Trigger Fan   (> 32)
+    moist = 300;   // Trigger Pump  (< 400)
+    lux = 100.0;     // Trigger Light (< 200)
+    Serial.println("🧪 TEST MODE ACTIVE: Overriding sensor values -> [Temp:35°C, Moist:300ADC, Lux:100]");
+  }
+
   // 4. Debug output
   Serial.printf("\n📊 Temp=%.1f°C  Hum=%.1f%%  Moist=%d  Lux=%.0f\n",
                 temp, hum, moist, lux);
@@ -144,6 +156,9 @@ void sendSensorData() {
   String payload;
   serializeJson(doc, payload);
 
+  Serial.println("\n🌐 OUTGOING PAYLOAD:");
+  Serial.println(payload);
+
   // 6. HTTP POST
   HTTPClient http;
   http.begin(SERVER_URL);
@@ -153,7 +168,8 @@ void sendSensorData() {
 
   if (httpCode == HTTP_CODE_OK) {
     String response = http.getString();
-    Serial.printf("✅ Server response: %s\n", response.c_str());
+    Serial.println("✅ SERVER RESPONSE BODY:");
+    Serial.println(response);
 
     // 7. Parse relay commands
     StaticJsonDocument<64> resp;
@@ -168,7 +184,7 @@ void sendSensorData() {
       Serial.printf("⚠️  JSON parse error: %s\n", err.c_str());
     }
   } else {
-    Serial.printf("❌ HTTP error: %d  — %s\n", httpCode, http.errorToString(httpCode).c_str());
+    Serial.printf("❌ HTTP error: %d  — %s (Retrying next loop)\n", httpCode, http.errorToString(httpCode).c_str());
   }
 
   http.end();
