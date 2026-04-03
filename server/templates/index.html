@@ -1,388 +1,326 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="light" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Autonomous Hive | Precision IoT Dashboard</title>
-<meta name="description" content="Real-time IoT dashboard for Autonomous Hive precision farming. Edge-AI system: ESP32 sensors feed Flask rule engine to automate irrigation, lighting and cooling."/>
+<title>Autonomous Hive | IoT Dashboard</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
                 extend: {
-                    colors: {
-                        "surface-container-high": "#222c26",
-                        "surface-container-lowest": "#07100b",
-                        "inverse-surface": "#dae5dc",
-                        "tertiary": "#ffb690",
-                        "on-secondary-container": "#dfbcff",
-                        "on-tertiary-fixed": "#341100",
-                        "on-tertiary": "#552100",
-                        "on-primary-container": "#003121",
-                        "primary": "#68dbae",
-                        "primary-container": "#26a37a",
-                        "surface-bright": "#313c35",
-                        "inverse-on-surface": "#28332d",
-                        "surface": "#0b1510",
-                        "surface-container": "#18221c",
-                        "surface-tint": "#68dbae",
-                        "on-surface-variant": "#bccac1",
-                        "tertiary-fixed-dim": "#ffb690",
-                        "on-primary": "#003827",
-                        "on-secondary-fixed": "#2c0051",
-                        "on-secondary": "#490080",
-                        "on-secondary-fixed-variant": "#6800b4",
-                        "background": "#0b1510",
-                        "surface-variant": "#2d3731",
-                        "on-error-container": "#ffdad6",
-                        "surface-container-highest": "#2d3731",
-                        "primary-fixed-dim": "#68dbae",
-                        "outline": "#87948c",
-                        "secondary": "#ddb8ff",
-                        "inverse-primary": "#006c4e",
-                        "primary-fixed": "#86f8c9",
-                        "tertiary-container": "#ec6a06",
-                        "secondary-fixed": "#f0dbff",
-                        "tertiary-fixed": "#ffdbca",
-                        "surface-dim": "#0b1510",
-                        "outline-variant": "#3d4943",
-                        "on-tertiary-fixed-variant": "#783200",
-                        "error-container": "#93000a",
-                        "error": "#ffb4ab",
-                        "surface-container-low": "#141e18",
-                        "secondary-fixed-dim": "#ddb8ff",
-                        "on-error": "#690005",
-                        "on-primary-fixed-variant": "#00513a",
-                        "secondary-container": "#7c03d3",
-                        "on-surface": "#dae5dc",
-                        "on-tertiary-container": "#4a1c00",
-                        "on-primary-fixed": "#002115",
-                        "on-background": "#dae5dc"
+                    "colors": {
+                        "tertiary": "#006573",
+                        "secondary-container": "#7afbb7",
+                        "error-container": "#f95630",
+                        "tertiary-fixed": "#00e0fd",
+                        "inverse-surface": "#0b0f10",
+                        "surface-container-low": "#eef1f3",
+                        "surface-container": "#e5e9eb",
+                        "secondary-fixed": "#7afbb7",
+                        "on-tertiary-fixed-variant": "#005561",
+                        "on-primary": "#ceffd0",
+                        "on-secondary-container": "#005e3a",
+                        "secondary-dim": "#005c39",
+                        "primary-dim": "#005d26",
+                        "on-primary-container": "#005f28",
+                        "tertiary-dim": "#005865",
+                        "secondary-fixed-dim": "#6beca9",
+                        "outline-variant": "#abadaf",
+                        "primary": "#006a2d",
+                        "surface-container-high": "#dfe3e6",
+                        "surface": "#f5f7f9",
+                        "on-error-container": "#520c00",
+                        "on-tertiary-container": "#004b56",
+                        "surface-tint": "#006a2d",
+                        "error": "#b02500",
+                        "on-secondary": "#caffdc",
+                        "primary-fixed-dim": "#5bf083",
+                        "primary-container": "#6bff8f",
+                        "error-dim": "#b92902",
+                        "on-primary-fixed-variant": "#006a2d",
+                        "on-secondary-fixed-variant": "#006942",
+                        "on-secondary-fixed": "#00492c",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f5f7f9",
+                        "outline": "#747779",
+                        "on-error": "#ffefec",
+                        "primary-fixed": "#6bff8f",
+                        "background": "#f5f7f9",
+                        "inverse-on-surface": "#9a9d9f",
+                        "on-tertiary-fixed": "#00363e",
+                        "inverse-primary": "#6bff8f",
+                        "secondary": "#006942",
+                        "on-background": "#2c2f31",
+                        "surface-dim": "#d0d5d8",
+                        "on-tertiary": "#daf8ff",
+                        "surface-container-highest": "#d9dde0",
+                        "on-surface": "#2c2f31",
+                        "tertiary-container": "#00e0fd",
+                        "on-surface-variant": "#595c5e",
+                        "surface-variant": "#d9dde0",
+                        "on-primary-fixed": "#004a1d",
+                        "tertiary-fixed-dim": "#00d1ec"
                     },
-                    fontFamily: {
-                        "headline": ["Space Grotesk"],
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
                         "body": ["Inter"],
                         "label": ["Inter"]
-                    },
-                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                    }
                 },
             },
         }
-    </script>
+</script>
 <style>
-        .glass-panel {
-            background: rgba(11, 21, 16, 0.6);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(61, 73, 67, 0.2);
-        }
-        .emerald-glow {
-            box-shadow: 0 0 15px rgba(104, 219, 174, 0.3);
-        }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        .status-pulse {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .4; }
-        }
-        /* Live bar transition */
-        .live-bar { transition: width 1s ease-in-out; }
-        /* Relay ON state */
-        .relay-active { border-left-color: #68dbae !important; opacity: 1 !important; }
-        .relay-inactive { border-left-color: #3d4943 !important; opacity: 0.55 !important; }
-    </style>
+    body { font-family: 'Inter', sans-serif; background-color: #F8FAFC;}
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    body {
+      min-height: max(884px, 100dvh);
+    }
+</style>
 </head>
-<body class="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary min-h-screen">
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-[#0b1510]/60 backdrop-blur-lg shadow-[0_0_40px_rgba(104,219,174,0.05)]">
-<div class="flex items-center gap-4">
-<div class="relative flex items-center justify-center">
-<span class="material-symbols-outlined text-3xl text-primary" data-icon="hive">hive</span>
-<div class="absolute inset-0 bg-primary/20 blur-xl rounded-full"></div>
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200">
+<div class="flex items-center justify-between px-6 h-16 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#22C55E] text-3xl" data-icon="hive">hive</span>
+<h1 class="text-xl font-extrabold tracking-tight text-slate-900 font-['Inter']">Autonomous Hive</h1>
 </div>
-<div>
-<h1 class="text-xl font-bold bg-gradient-to-r from-[#68dbae] to-[#26a37a] bg-clip-text text-transparent font-headline tracking-tight uppercase">Autonomous Hive</h1>
-<p class="text-[10px] text-on-surface-variant font-headline tracking-[0.2em] uppercase opacity-70">Edge-AI Precision Farming</p>
-</div>
-</div>
-<nav class="hidden md:flex gap-8">
-<a class="text-[#68dbae] border-b-2 border-[#68dbae] pb-1 font-headline text-sm tracking-widest" href="#">SENSE</a>
-<a class="text-[#bccac1] hover:text-[#68dbae] transition-colors font-headline text-sm tracking-widest" href="#">THINK</a>
-<a class="text-[#bccac1] hover:text-[#68dbae] transition-colors font-headline text-sm tracking-widest" href="#">ACT</a>
+<div class="flex items-center">
+<nav class="hidden md:flex items-center gap-8 mr-8 h-16">
+<a class="text-[#22C55E] font-bold text-sm border-b-2 border-[#22C55E] h-full flex items-center px-1" href="#">Dashboard</a>
+<a class="text-slate-500 font-medium text-sm hover:text-[#22C55E] transition h-full flex items-center px-1 border-b-2 border-transparent" href="#">Analytics</a>
+<a class="text-slate-500 font-medium text-sm hover:text-[#22C55E] transition h-full flex items-center px-1 border-b-2 border-transparent" href="#">Settings</a>
 </nav>
-<div class="flex items-center gap-6">
-<div class="flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/20">
-<div id="conn-dot" class="w-2 h-2 bg-gray-500 rounded-full"></div>
-<span id="conn-text" class="text-[10px] font-bold tracking-tighter text-on-surface-variant">WAITING…</span>
-<span class="text-[10px] text-on-surface-variant/40 ml-2">AUTO-REFRESH 5S</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-slate-100 shadow-sm bg-slate-50 flex items-center justify-center cursor-pointer hover:border-[#22C55E]/30 transition">
+<span class="material-symbols-outlined text-slate-400">person</span>
 </div>
-<div class="text-[10px] font-mono text-on-surface-variant/50" id="last-ts">—</div>
+</div>
 </div>
 </header>
-<!-- SideNavBar -->
-<aside class="fixed left-0 top-0 h-full hidden lg:flex flex-col py-8 w-64 bg-[#0b1510]/80 backdrop-blur-xl border-r border-[#bccac1]/15 z-40">
-<div class="px-6 mb-12 mt-16">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center border border-primary/20">
-<span class="material-symbols-outlined text-primary" data-icon="memory">memory</span>
+<main class="pt-24 px-6 max-w-screen-xl mx-auto space-y-8">
+<!-- Header Section -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<p class="text-[#22C55E] font-bold tracking-wider text-xs uppercase mb-1" id="badge-mode">Initializing...</p>
+<h2 class="text-3xl font-bold text-slate-800 tracking-tight">Environmental Control</h2>
+<p class="text-sm text-slate-500 font-mono mt-2" id="val-data-count">Data Points: 0</p>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-500 bg-white shadow-sm border border-slate-100 px-4 py-2 rounded-full">
+<span class="flex h-2 w-2 rounded-full bg-red-400" id="conn-dot"></span>
+    <span id="conn-text">Polling Real-Time Feed</span>
+</div>
+</section>
+<!-- Four-Column Sensor Grid -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 tracking-tight">
+<!-- Temperature -->
+<div class="bg-white p-6 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100 hover:shadow-lg transition">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-xl bg-orange-50 text-orange-600">
+<span class="material-symbols-outlined text-xl" data-icon="thermostat">thermostat</span>
+</div>
+</div>
+<p class="text-slate-400 font-medium text-sm uppercase tracking-wider text-[11px]">Temperature</p>
+<div class="flex items-baseline gap-1 mt-1"><h3 class="text-3xl font-bold text-slate-800" id="val-temp">--</h3><span class="text-xl text-slate-400">°C</span></div>
+</div>
+<!-- Humidity -->
+<div class="bg-white p-6 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100 hover:shadow-lg transition">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-xl bg-blue-50 text-blue-500">
+<span class="material-symbols-outlined text-xl" data-icon="water_drop">water_drop</span>
+</div>
+</div>
+<p class="text-slate-400 font-medium text-sm uppercase tracking-wider text-[11px]">Humidity</p>
+<div class="flex items-baseline gap-1 mt-1"><h3 class="text-3xl font-bold text-slate-800" id="val-hum">--</h3><span class="text-xl text-slate-400">%</span></div>
+</div>
+<!-- Soil Moisture -->
+<div class="bg-white p-6 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100 hover:shadow-lg transition">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-xl bg-[#22C55E]/10 text-[#22C55E]">
+<span class="material-symbols-outlined text-xl" data-icon="grass">grass</span>
+</div>
+</div>
+<p class="text-slate-400 font-medium text-sm uppercase tracking-wider text-[11px]">Soil Moisture</p>
+<div class="flex items-baseline gap-1 mt-1"><h3 class="text-3xl font-bold text-slate-800" id="val-moist">--</h3><span class="text-xl text-slate-400">ADC</span></div>
+</div>
+<!-- Light -->
+<div class="bg-white p-6 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100 hover:shadow-lg transition">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 rounded-xl bg-yellow-50 text-yellow-500">
+<span class="material-symbols-outlined text-xl" data-icon="light_mode">light_mode</span>
+</div>
+</div>
+<p class="text-slate-400 font-medium text-sm uppercase tracking-wider text-[11px]">Light Intensity</p>
+<div class="flex items-baseline gap-1 mt-1"><h3 class="text-3xl font-bold text-slate-800" id="val-lux">--</h3><span class="text-xl text-slate-400">Lux</span></div>
+</div>
+</section>
+<!-- Middle Section: Performance & Controls -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Overview Performance Chart -->
+<div class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="text-lg font-bold text-slate-800">Overview Performance</h3>
+<p class="text-slate-400 text-sm">System efficiency tracking</p>
+</div>
+</div>
+<!-- Simple SVG Mock Chart -->
+<div class="h-56 w-full relative">
+<svg class="w-full h-full" viewbox="0 0 1000 300">
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:rgba(34,197,94,0.15); stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:rgba(34,197,94,0); stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,250 Q100,180 200,150 T400,120 T600,80 T800,110 T1000,50" fill="none" stroke="#22C55E" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0,250 Q100,180 200,150 T400,120 T600,80 T800,110 T1000,50 L1000,300 L0,300 Z" fill="url(#chartGradient)"></path>
+</svg>
+<!-- Chart Labels -->
+<div class="absolute bottom-0 w-full flex justify-between text-[10px] text-slate-300 font-bold uppercase tracking-widest px-2">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</div>
+<!-- Actuators Control Card -->
+<div class="bg-white p-8 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+    <div>
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Actuators</h3>
+        <p class="text-slate-400 text-sm" id="actuator-mode-text">Live Run State</p>
+    </div>
+    <div class="flex items-center gap-2">
+        <span class="text-[11px] font-bold text-[#22C55E] uppercase tracking-wider" id="mode-label-auto">AUTO</span>
+        <label class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="toggle-mode" class="sr-only peer" onchange="toggleMode()"/>
+            <div class="w-11 h-6 bg-[#22C55E] rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-orange-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all shadow-sm"></div>
+        </label>
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider" id="mode-label-manual">MANUAL</span>
+    </div>
+</div>
+<div class="space-y-4">
+<!-- Pump -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-100 transition-all duration-300" id="relay-pump">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#22C55E]/10 flex items-center justify-center text-[#22C55E]">
+<span class="material-symbols-outlined size-[20px]" data-icon="water_pump">water_pump</span>
 </div>
 <div>
-<h3 class="font-headline font-black text-[#68dbae] text-sm">Edge-AI</h3>
-<p class="text-[10px] text-on-surface-variant">v1.0.0 Stable</p>
+<p class="font-bold text-slate-700 text-[13px]">Irrigation Pump</p>
+<p class="text-xs text-slate-400 font-medium" id="badge-pump">--</p>
 </div>
 </div>
+<label class="relative inline-flex items-center">
+<input class="sr-only peer" type="checkbox" id="toggle-pump" disabled onchange="sendManualUpdate()"/>
+<div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#22C55E] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
 </div>
-<nav class="flex-1 px-4 space-y-2">
-<a class="flex items-center gap-4 px-4 py-3 text-[#68dbae] bg-[#68dbae]/10 border-r-4 border-[#68dbae] font-label text-xs uppercase tracking-widest transition-all duration-300" href="#">
-<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
-                Telemetry
-            </a>
-<a class="flex items-center gap-4 px-4 py-3 text-[#bccac1] opacity-70 hover:opacity-100 hover:bg-white/5 font-label text-xs uppercase tracking-widest transition-all duration-300" href="#">
-<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
-                Automation
-            </a>
-<a class="flex items-center gap-4 px-4 py-3 text-[#bccac1] opacity-70 hover:opacity-100 hover:bg-white/5 font-label text-xs uppercase tracking-widest transition-all duration-300" href="#">
-<span class="material-symbols-outlined" data-icon="hub">hub</span>
-                Nodes
-            </a>
-<a class="flex items-center gap-4 px-4 py-3 text-[#bccac1] opacity-70 hover:opacity-100 hover:bg-white/5 font-label text-xs uppercase tracking-widest transition-all duration-300" href="#">
-<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
-                Log
-            </a>
-</nav>
-<div class="px-4">
-<button class="w-full py-4 text-[10px] font-bold tracking-[0.2em] bg-primary-container text-on-primary-container hover:bg-primary transition-all duration-300 rounded-sm">
-                DEPLOY UPDATE
-            </button>
+<!-- Grow Light -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-100 transition-all duration-300" id="relay-light">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#22C55E]/10 flex items-center justify-center text-[#22C55E]">
+<span class="material-symbols-outlined size-[20px]" data-icon="wb_sunny">wb_sunny</span>
 </div>
-</aside>
-<!-- Main Content -->
-<main class="lg:pl-64 pt-24 px-6 pb-12 space-y-8">
-<!-- Pipeline Status -->
-<section class="max-w-4xl">
-<div class="glass-panel p-1.5 rounded-full flex items-center justify-between">
-<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full bg-primary/10 border border-primary/20">
-<span class="material-symbols-outlined text-primary text-sm" data-icon="visibility">visibility</span>
-<span class="font-headline font-bold text-primary text-xs tracking-widest">SENSE</span>
+<div>
+<p class="font-bold text-slate-700 text-[13px]">Grow Light</p>
+<p class="text-xs text-slate-400 font-medium" id="badge-light">--</p>
 </div>
-<div class="px-4 text-on-surface-variant/30">
-<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
 </div>
-<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full bg-secondary/10 border border-secondary/20">
-<span class="material-symbols-outlined text-secondary text-sm" data-icon="psychology">psychology</span>
-<span class="font-headline font-bold text-secondary text-xs tracking-widest">THINK</span>
+<label class="relative inline-flex items-center">
+<input class="sr-only peer" type="checkbox" id="toggle-light" disabled onchange="sendManualUpdate()"/>
+<div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#22C55E] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
 </div>
-<div class="px-4 text-on-surface-variant/30">
-<span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+<!-- Cooling Fan -->
+<div class="flex items-center justify-between p-4 rounded-xl bg-slate-50 border border-slate-100 transition-all duration-300" id="relay-fan">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center text-slate-500" id="icon-fan-bg">
+<span class="material-symbols-outlined size-[20px]" data-icon="air" id="icon-fan">air</span>
 </div>
-<div class="flex-1 flex items-center justify-center gap-3 py-2 px-6 rounded-full bg-tertiary/10 border border-tertiary/20">
-<span class="material-symbols-outlined text-tertiary text-sm" data-icon="bolt">bolt</span>
-<span class="font-headline font-bold text-tertiary text-xs tracking-widest">ACT</span>
+<div>
+<p class="font-bold text-slate-700 text-[13px]">Cooling Fan</p>
+<p class="text-xs text-slate-400 font-medium" id="badge-fan">--</p>
+</div>
+</div>
+<label class="relative inline-flex items-center">
+<input class="sr-only peer" type="checkbox" id="toggle-fan" disabled onchange="sendManualUpdate()"/>
+<div class="w-11 h-6 bg-slate-200 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-[#22C55E] after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+</label>
+</div>
 </div>
 </div>
 </section>
-<div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
-<!-- SENSOR GRID -->
-<div class="xl:col-span-8 space-y-6">
-<div class="flex justify-between items-end">
-<h2 class="font-headline text-2xl font-light tracking-tight text-on-surface">Telemetry <span class="text-primary font-bold">Nodes</span></h2>
-<span class="text-[10px] font-mono text-on-surface-variant opacity-50">LIVE · ESP32</span>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<!-- Temp -->
-<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl" data-icon="device_thermostat">device_thermostat</span>
-</div>
-<div class="space-y-4 relative z-10">
-<div class="flex justify-between items-start">
-<p class="text-xs font-headline tracking-widest text-on-surface-variant uppercase">Temperature</p>
-<span class="material-symbols-outlined text-error text-xl" data-icon="thermostat">thermostat</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span id="val-temp" class="text-5xl font-headline font-bold text-on-surface">—</span>
-<span class="text-xl font-headline text-on-surface-variant">°C</span>
-</div>
-<div class="space-y-2">
-<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="bar-temp" class="h-full bg-gradient-to-r from-error/50 to-error live-bar" style="width:0%"></div>
-</div>
-<p class="text-[10px] text-on-surface-variant italic">Fan kicks on at &gt;32°C</p>
+<!-- Bottom Section: Logs -->
+<section class="bg-white p-8 rounded-2xl shadow-[0_2px_15px_rgba(0,0,0,0.03)] border border-slate-100">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#22C55E] text-xl" data-icon="receipt_long">receipt_long</span>
+<h3 class="text-[15px] font-bold text-slate-800">System Logs</h3>
 </div>
 </div>
+<div class="divide-y divide-slate-50">
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-[#22C55E]"></div>
+<span class="text-[13px] font-medium text-slate-700">AI Component Initialization Validated</span>
 </div>
-<!-- Humidity -->
-<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl" data-icon="humidity_mid">humidity_mid</span>
-</div>
-<div class="space-y-4 relative z-10">
-<div class="flex justify-between items-start">
-<p class="text-xs font-headline tracking-widest text-on-surface-variant uppercase">Humidity</p>
-<span class="material-symbols-outlined text-primary text-xl" data-icon="water_drop">water_drop</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span id="val-hum" class="text-5xl font-headline font-bold text-on-surface">—</span>
-<span class="text-xl font-headline text-on-surface-variant">%</span>
-</div>
-<div class="space-y-2">
-<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="bar-hum" class="h-full bg-gradient-to-r from-primary-container to-primary live-bar" style="width:0%"></div>
-</div>
-<p class="text-[10px] text-on-surface-variant italic">Optimal 60-80%</p>
+<span class="text-[11px] text-slate-400">Autonomously checking...</span>
 </div>
 </div>
-</div>
-<!-- Soil Moisture -->
-<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl" data-icon="potted_plant">potted_plant</span>
-</div>
-<div class="space-y-4 relative z-10">
-<div class="flex justify-between items-start">
-<p class="text-xs font-headline tracking-widest text-on-surface-variant uppercase">Soil Moisture</p>
-<span class="material-symbols-outlined text-primary text-xl" data-icon="grass">grass</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span id="val-moist" class="text-5xl font-headline font-bold text-on-surface">—</span>
-<span class="text-xl font-headline text-on-surface-variant uppercase">ADC</span>
-</div>
-<div class="space-y-2">
-<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="bar-moist" class="h-full bg-gradient-to-r from-[#26a37a] to-[#68dbae] live-bar" style="width:0%"></div>
-</div>
-<p class="text-[10px] text-on-surface-variant italic">Pump ON at &lt;400 (dry)</p>
-</div>
-</div>
-</div>
-<!-- Light -->
-<div class="glass-panel p-6 rounded-lg relative overflow-hidden group">
-<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-<span class="material-symbols-outlined text-6xl" data-icon="wb_sunny">wb_sunny</span>
-</div>
-<div class="space-y-4 relative z-10">
-<div class="flex justify-between items-start">
-<p class="text-xs font-headline tracking-widest text-on-surface-variant uppercase">Light Intensity</p>
-<span class="material-symbols-outlined text-tertiary text-xl" data-icon="light_mode">light_mode</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span id="val-lux" class="text-5xl font-headline font-bold text-on-surface">—</span>
-<span class="text-xl font-headline text-on-surface-variant uppercase">Lux</span>
-</div>
-<div class="space-y-2">
-<div class="h-1 w-full bg-surface-container rounded-full overflow-hidden">
-<div id="bar-lux" class="h-full bg-gradient-to-r from-tertiary/50 to-tertiary live-bar" style="width:0%"></div>
-</div>
-<p class="text-[10px] text-on-surface-variant italic">Grow light ON at &lt;200 lux</p>
-</div>
-</div>
-</div>
-</div>
-<!-- RULE ENGINE -->
-<div class="space-y-4">
-<h3 class="font-headline text-sm tracking-[0.3em] text-on-surface-variant uppercase opacity-60">Logic Core</h3>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<div class="bg-surface-container-low p-4 border-l-2 border-primary/40 rounded-sm">
-<code class="text-xs font-mono text-primary">moist &lt; 400 → pump = 1</code>
-<p class="text-[9px] text-on-surface-variant mt-2 uppercase tracking-tighter">Irrigation Override</p>
-</div>
-<div class="bg-surface-container-low p-4 border-l-2 border-secondary/40 rounded-sm">
-<code class="text-xs font-mono text-secondary">lux &lt; 200 → light = 1</code>
-<p class="text-[9px] text-on-surface-variant mt-2 uppercase tracking-tighter">Photosynthetic assist</p>
-</div>
-<div class="bg-surface-container-low p-4 border-l-2 border-error/40 rounded-sm">
-<code class="text-xs font-mono text-error">temp &gt; 32 → fan = 1</code>
-<p class="text-[9px] text-on-surface-variant mt-2 uppercase tracking-tighter">Thermal management</p>
-</div>
-</div>
-</div>
-</div>
-<!-- ACTUATORS -->
-<div class="xl:col-span-4 space-y-6">
-<h2 class="font-headline text-2xl font-light tracking-tight text-on-surface">System <span class="text-secondary font-bold">Actuators</span></h2>
-<div class="space-y-4">
-<!-- Pump -->
-<div id="relay-pump" class="glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant opacity-60 transition-all duration-700">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-primary" data-icon="water_pump">water_pump</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface text-sm">Peristaltic Pump</h4>
-<p class="text-[10px] font-mono text-on-surface-variant">IN1 · GPIO2 · 12V</p>
-</div>
-</div>
-<div id="badge-pump" class="bg-surface-variant text-on-surface-variant text-[10px] font-black px-3 py-1 rounded-full transition-all duration-500">OFF</div>
-</div>
-<!-- Grow Light -->
-<div id="relay-light" class="glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant opacity-60 transition-all duration-700">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-primary" data-icon="wb_incandescent">wb_incandescent</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface text-sm">LED Grow Light</h4>
-<p class="text-[10px] font-mono text-on-surface-variant">IN2 · GPIO4</p>
-</div>
-</div>
-<div id="badge-light" class="bg-surface-variant text-on-surface-variant text-[10px] font-black px-3 py-1 rounded-full transition-all duration-500">OFF</div>
-</div>
-<!-- Fan -->
-<div id="relay-fan" class="glass-panel p-5 rounded-lg flex items-center justify-between border-l-4 border-outline-variant opacity-60 transition-all duration-700">
-<div class="flex items-center gap-4">
-<div class="w-12 h-12 bg-surface-container rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-on-surface-variant" data-icon="fan">toys_fan</span>
-</div>
-<div>
-<h4 class="font-headline font-bold text-on-surface text-sm">Cooling Fan</h4>
-<p class="text-[10px] font-mono text-on-surface-variant">IN3 · GPIO12</p>
-</div>
-</div>
-<div id="badge-fan" class="bg-surface-variant text-on-surface-variant text-[10px] font-black px-3 py-1 rounded-full transition-all duration-500">OFF</div>
-</div>
-</div>
-<!-- Visual Node Preview -->
-<div class="relative mt-8 group">
-<div class="absolute inset-0 bg-primary/5 blur-3xl group-hover:bg-primary/10 transition-all duration-700"></div>
-<div class="relative rounded-xl overflow-hidden glass-panel aspect-square flex flex-col items-center justify-center p-8 border border-primary/10">
-<div class="w-full h-full rounded-lg bg-surface-container-lowest overflow-hidden relative">
-<img alt="Smart greenhouse internal view" class="w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpWOvMHNNl9kx9-767PaI1ykOszQ8Ad6_0vESI2al01Cb_IGSSOiF4qxPjEBLMHQpGKRtVwTxLyPotNAjVg0ASBaiCMGXe4kBFzHKtrTxp3Jm9PC27TP4vK9mQh64-fO5jP_uHPLtxwgVykIfrPGzNafP4Yq6IrQdLJWkY9wf9mqOkMnMJt84SraBL9mBXq7HE-p7gB5RNjc18eqvB3cNFK4GaXdzDWBNmi1UKZbTghD0BxxLGsvVQBmn_j12LV2joWfcBbqWvRwo"/>
-<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border-2 border-primary/20 rounded-full flex items-center justify-center">
-<div class="w-32 h-32 border border-primary/40 rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite]">
-<div class="w-2 h-2 bg-primary rounded-full absolute top-0"></div>
-</div>
-</div>
-</div>
-<div class="absolute bottom-6 left-6 right-6 flex justify-between items-center">
-<div class="flex flex-col">
-<span class="text-[10px] text-primary font-bold tracking-widest uppercase">Live Feed</span>
-<span class="text-[8px] text-on-surface-variant">NODE_01_ESP32_ALPHA</span>
-</div>
-<div class="bg-error/20 px-2 py-1 rounded text-[8px] font-bold text-error flex items-center gap-1">
-<div class="w-1 h-1 bg-error rounded-full status-pulse"></div>
-                                LIVE
-                            </div>
-</div>
-</div>
-</div>
-</div>
-</div>
+</section>
 </main>
-<!-- FAB -->
-<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full flex items-center justify-center emerald-glow active:scale-95 transition-all z-50">
-<span class="material-symbols-outlined" data-icon="add">add</span>
-</button>
-
-<!-- ══ LIVE POLLING JS (injected for Flask integration) ══ -->
 <script>
 const POLL_MS = 5000;
+let currentMode = "AUTO";
+
+async function toggleMode() {
+    const isManual = document.getElementById("toggle-mode").checked;
+    currentMode = isManual ? "MANUAL" : "AUTO";
+    
+    document.getElementById("mode-label-auto").className = isManual ? "text-[11px] font-bold text-slate-400 uppercase tracking-wider transition-all" : "text-[11px] font-bold text-[#22C55E] uppercase tracking-wider transition-all";
+    document.getElementById("mode-label-manual").className = isManual ? "text-[11px] font-bold text-orange-500 uppercase tracking-wider transition-all" : "text-[11px] font-bold text-slate-400 uppercase tracking-wider transition-all";
+    
+    document.getElementById("toggle-pump").disabled = !isManual;
+    document.getElementById("toggle-light").disabled = !isManual;
+    document.getElementById("toggle-fan").disabled = !isManual;
+    
+    await sendManualUpdate();
+}
+
+async function sendManualUpdate() {
+    let payload = {};
+    if (currentMode === "MANUAL") {
+        payload = {
+            mode: "MANUAL",
+            pump: document.getElementById("toggle-pump").checked ? 1 : 0,
+            light: document.getElementById("toggle-light").checked ? 1 : 0,
+            fan: document.getElementById("toggle-fan").checked ? 1 : 0
+        };
+    } else {
+        payload = {
+            mode: "AUTO"
+        };
+    }
+    
+    await fetch('/set_control', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+}
 
 async function poll() {
   try {
@@ -391,68 +329,106 @@ async function poll() {
     const d = await res.json();
     updateSensors(d);
     updateRelays(d);
+    updateEngineStatus(d);
     setConn(true, d.timestamp);
   } catch (e) {
+    console.error(e);
     setConn(false);
   }
 }
-
 function setVal(id, v, decimals = 1) {
   const el = document.getElementById(id);
-  if (el) el.textContent = (v !== null && v !== undefined) ? (typeof v === 'number' ? v.toFixed(decimals) : v) : '—';
+  if (el) el.textContent = (v !== null && v !== undefined) ? (typeof v === 'number' ? v.toFixed(decimals) : v) : '--';
 }
-
-function setBar(id, val, min, max) {
-  const el = document.getElementById(id);
-  if (!el || val == null) return;
-  el.style.width = Math.min(100, Math.max(0, ((val - min) / (max - min)) * 100)) + '%';
-}
-
 function updateSensors(d) {
   setVal('val-temp',  d.temp,  1);
   setVal('val-hum',   d.hum,   1);
   setVal('val-moist', d.moist, 0);
   setVal('val-lux',   d.lux,   0);
-  setBar('bar-temp',  d.temp,  0,   50);
-  setBar('bar-hum',   d.hum,   0,  100);
-  setBar('bar-moist', d.moist, 0, 4095);
-  setBar('bar-lux',   d.lux,   0, 2000);
 }
-
+function setRelay(name, state) {
+  const badge = document.getElementById('badge-' + name);
+  const toggle = document.getElementById('toggle-' + name);
+  const card = document.getElementById('relay-' + name);
+  const on = (state === 1 || state === true);
+  
+  if (badge) {
+    badge.textContent = on ? 'System Active' : 'Offline';
+    badge.className = on ? 'text-xs text-[#22C55E] font-bold transition-all' : 'text-xs text-slate-400 font-medium transition-all';
+  }
+  if (toggle && currentMode !== "MANUAL") {
+    toggle.checked = on;
+  }
+  if (card) {
+      if (on) {
+          card.classList.add('shadow-md', 'border-[#22C55E]/30', 'bg-white');
+          card.classList.remove('bg-slate-50', 'border-slate-100');
+      } else {
+          card.classList.remove('shadow-md', 'border-[#22C55E]/30', 'bg-white');
+          card.classList.add('bg-slate-50', 'border-slate-100');
+      }
+  }
+  
+  // Specific fan icon toggle based on state
+  if (name === 'fan') {
+      const fanBg = document.getElementById('icon-fan-bg');
+      const fanIcon = document.getElementById('icon-fan');
+      if (fanBg && fanIcon) {
+          if (on) {
+             fanBg.classList.replace('bg-slate-200', 'bg-[#22C55E]/10');
+             fanIcon.classList.replace('text-slate-500', 'text-[#22C55E]');
+          } else {
+             fanBg.classList.replace('bg-[#22C55E]/10', 'bg-slate-200');
+             fanIcon.classList.replace('text-[#22C55E]', 'text-slate-500');
+          }
+      }
+  }
+}
 function updateRelays(d) {
   setRelay('pump',  d.pump);
   setRelay('light', d.light);
   setRelay('fan',   d.fan);
 }
-
-function setRelay(name, state) {
-  const card  = document.getElementById('relay-' + name);
-  const badge = document.getElementById('badge-' + name);
-  const on = (state === 1 || state === true);
-  if (card) {
-    card.className = card.className
-      .replace(/opacity-\d+/g, on ? 'opacity-100' : 'opacity-60')
-      .replace(/border-\w[\w-]*/g, on ? 'border-primary' : 'border-outline-variant');
-    if (on) card.classList.add('emerald-glow'); else card.classList.remove('emerald-glow');
-  }
-  if (badge) {
-    badge.textContent = on ? 'ON' : 'OFF';
-    badge.className = on
-      ? 'bg-primary/20 text-primary text-[10px] font-black px-3 py-1 rounded-full border border-primary/30 transition-all duration-500'
-      : 'bg-surface-variant text-on-surface-variant text-[10px] font-black px-3 py-1 rounded-full transition-all duration-500';
-  }
+function updateEngineStatus(d) {
+    const badge = document.getElementById('badge-mode');
+    const count = document.getElementById('val-data-count');
+    
+    if (count && d.data_count !== undefined) {
+        count.textContent = `Telemetry Log Size: ${d.data_count} samples`;
+    }
+    
+    if (badge && d.mode) {
+        if (d.mode === 'ML') {
+            badge.textContent = 'RandomForest AI Active';
+            badge.className = 'text-[#22C55E] bg-[#22C55E]/10 px-3 py-1 rounded-md inline-block font-bold tracking-wider text-xs uppercase mb-1 transition-all';
+        } else if (d.mode === 'MANUAL') {
+            badge.textContent = 'Manual Override Active';
+            badge.className = 'text-orange-500 bg-orange-500/10 px-3 py-1 rounded-md inline-block font-bold tracking-wider text-xs uppercase mb-1 transition-all';
+        } else {
+            badge.textContent = 'Rule Fallback Executing';
+            badge.className = 'text-orange-500 bg-orange-500/10 px-3 py-1 rounded-md inline-block font-bold tracking-wider text-xs uppercase mb-1 transition-all';
+        }
+    }
+    
+    if (d.control && d.control.mode && currentMode !== d.control.mode) {
+         currentMode = d.control.mode;
+         const isManual = (currentMode === "MANUAL");
+         
+         const toggleEl = document.getElementById("toggle-mode");
+         if (toggleEl && toggleEl.checked !== isManual) toggleEl.checked = isManual;
+         
+         document.getElementById("mode-label-auto").className = isManual ? "text-[11px] font-bold text-slate-400 uppercase tracking-wider" : "text-[11px] font-bold text-[#22C55E] uppercase tracking-wider";
+         document.getElementById("mode-label-manual").className = isManual ? "text-[11px] font-bold text-orange-500 uppercase tracking-wider" : "text-[11px] font-bold text-slate-400 uppercase tracking-wider";
+         document.getElementById("toggle-pump").disabled = !isManual;
+         document.getElementById("toggle-light").disabled = !isManual;
+         document.getElementById("toggle-fan").disabled = !isManual;
+    }
 }
-
 function setConn(online, ts) {
   const dot  = document.getElementById('conn-dot');
-  const text = document.getElementById('conn-text');
-  const tsEl = document.getElementById('last-ts');
-  if (dot)  dot.className  = 'w-2 h-2 rounded-full ' + (online ? 'bg-primary status-pulse' : 'bg-gray-500');
-  if (text) { text.textContent = online ? 'CONNECTED' : 'WAITING…'; }
-  if (tsEl && ts) tsEl.textContent = ts;
+  if (dot) dot.className = 'flex h-2 w-2 rounded-full ' + (online ? 'bg-[#22C55E] animate-[ping_2s_ease-in-out_infinite]' : 'bg-red-400');
 }
-
-poll();
 setInterval(poll, POLL_MS);
+poll();
 </script>
 </body></html>

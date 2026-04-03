@@ -1,0 +1,29 @@
+.glass-panel {
+    background: rgba(171, 255, 213, 0.6);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(61, 73, 67, 0.2);
+}
+
+.emerald-glow {
+    box-shadow: 0 0 15px rgba(209, 255, 237, 0.3);
+}
+
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.status-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: .4;
+    }
+}
