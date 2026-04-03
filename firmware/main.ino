@@ -18,8 +18,8 @@
 #include <BH1750.h>
 
 // ── WiFi credentials ────────────────────────────────────────────────────────
-const char* SSID      = "dlink-1373";
-const char* PASSWORD  = "$RAP534$";
+const char* SSID      = "TP-Link_251C_5G";
+const char* PASSWORD  = "84674012";
 
 // ── Server endpoint ─────────────────────────────────────────────────────────
 const char* SERVER_URL = "http://192.168.0.103:5000/process";
